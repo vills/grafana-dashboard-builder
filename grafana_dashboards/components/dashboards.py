@@ -27,15 +27,13 @@ class Dashboard(JsonGenerator):
 
     def gen_json_from_data(self, data, context):
         json_data = super(Dashboard, self).gen_json_from_data(data, context)
-        nav = {
-            'type': 'timepicker'
-        }
+        nav = { 'type': 'timepicker' }
         json_data.update({
             'title': data.get('title', self.name),
-            'nav': [
-                nav
-            ]
+            'nav': [ nav ]
         })
+        if 'annotations' in data:
+            json_data['annotations'] = data['annotations']
         if 'time' in data:
             json_data['time'] = {
                 'from': data['time']['from'],
