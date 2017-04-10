@@ -40,6 +40,8 @@ class Graph(PanelsItemBase):
             'type': 'graph',
             'title': self.data.get('title', None),
             'span': self.data.get('span', None),
+            'datasource': self.data.get('datasource', 'default'),
+            'nullPointMode': self.data.get('nullPointMode', 'null')
         })
         targets = self.data.get('targets', [])
         if targets:
@@ -47,7 +49,6 @@ class Graph(PanelsItemBase):
         elif 'target' in self.data:
             targets.append(self.data['target'])
             panel_json['targets'] = map(lambda v: {'target': v}, targets)
-        panel_json['nullPointMode'] = self.data.get('nullPointMode', 'null')
         if 'grid' in self.data:
             panel_json['grid'] = {
                 'leftMax': self.data['grid'].get('leftMax', None),
