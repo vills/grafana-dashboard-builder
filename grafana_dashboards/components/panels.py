@@ -43,7 +43,7 @@ class Graph(PanelsItemBase):
         })
         targets = self.data.get('targets', [])
         if targets:
-            panel_json['tagets'] = targets
+            panel_json['targets'] = targets
         elif 'target' in self.data:
             targets.append(self.data['target'])
             panel_json['targets'] = map(lambda v: {'target': v}, targets)
