@@ -42,9 +42,11 @@ class Graph(PanelsItemBase):
             'span': self.data.get('span', None),
         })
         targets = self.data.get('targets', [])
-        if 'target' in self.data:
+        if targets:
+            panel_json['tagets'] = targets
+        elif 'target' in self.data:
             targets.append(self.data['target'])
-        panel_json['targets'] = map(lambda v: {'target': v}, targets)
+            panel_json['targets'] = map(lambda v: {'target': v}, targets)
         panel_json['nullPointMode'] = self.data.get('nullPointMode', 'null')
         if 'grid' in self.data:
             panel_json['grid'] = {
