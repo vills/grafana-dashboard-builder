@@ -21,8 +21,8 @@ __author__ = 'Jakub Plichta <jakub.plichta@gmail.com>'
 
 class Context(object):
 
-    _pattern = re.compile('\{.*\}')
-
+    _pattern = re.compile('\${[^{}]+}')
+    
     def __init__(self, context=None):
         super(Context, self).__init__()
         if not context:
@@ -47,11 +47,16 @@ class Context(object):
             return to_expand
 
     def _expand(self, to_expand):
+        import ipdb
+        ipdb.set_trace()
         if not isinstance(to_expand, str):
             return to_expand, to_expand
-        elif self._pattern.match(to_expand) and to_expand[1:-1] in self._context:
+        elif self._pattern.match(to_expand) and to_expand[1:-1] in self._context:        
             return self._context[to_expand[1:-1]], to_expand
-        return string.Formatter().vformat(to_expand, (), self._context), to_expand
+        elif self._pattern.match(to_expand):
+            return string.Formatter().vformat(to_expand, (), self._context), to_expand
+        #return string.Formatter().vformat(to_expand, (), self._context), to_expand
+        return to_expand, to_expand
 
     def __str__(self):
         return str(self._context)

@@ -32,6 +32,9 @@ class Query(TemplatesItemBase):
         super(Query, self).gen_json_from_data(data, context)
         processed_parts = []
         queries = []
+        print "hello"
+        # import ipdb
+        # ipdb.set_trace()
         if not data.get('query'):
             return queries
         for query_part in data['query'].split('.'):
